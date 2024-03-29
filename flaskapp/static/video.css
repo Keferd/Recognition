@@ -323,11 +323,9 @@ footer {
     border-radius: 15px;
     padding: 30px;
     box-sizing: border-box;
-    margin-right: 40px;
+    margin-right: 60px;
 }
 
-.main__out__text-block__name {
-}
 
 .main__out__photo {
     max-width: 150px;
