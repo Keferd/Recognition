@@ -13,9 +13,7 @@ def recognize(redis_client: redis.Redis, img_path: str, detector_model: str = "m
                                     detector_backend=detector_model)
     recognized_data = []
     for idx, rep in enumerate(represents):
-        print(f'Face №{idx}')
         embedding = rep["embedding"]
-        print(embedding)
         query_vector = np.array(embedding).astype(np.float32).tobytes()
         base_query = f'*=>[KNN {k_neighbors} @embedding $query_vector AS distance]'
         query = Query(base_query).return_fields("distance").sort_by("distance").dialect(2)
@@ -30,7 +28,6 @@ def recognize(redis_client: redis.Redis, img_path: str, detector_model: str = "m
             }
 
         recognized_data.append(item)
-
 
     return recognized_data
 
