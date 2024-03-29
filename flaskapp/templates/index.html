@@ -28,6 +28,17 @@
                         <div id="fileNameDisplay" class="fileNameDisplay"></div>
                         <div id="status"></div>
                     </div>
+                    <div class="main__select-block">
+                        <select class="main__select" id="main__select_model"> 
+                            <option value='opencv'>OPENCV</option>
+                            <option value='retinaface'>RETINAFACE</option>
+                            <option value='mtcnn'>MTCNN</option>
+                            <option value='ssd'>SSD</option>
+                        </select>
+                        <a href="#" title="Можете изменить модель обнаружения лица, если не распознается Ваше лицо">
+                            <img style="width: 30px; margin-left: 10px" src="../static/img/question.png" alt="?">
+                        </a>
+                    </div>
                     <div class="main__in__checkbocks">
                         <div class="checkbox-container">
                             <input type="checkbox" id="checkbox_age" class="custom-checkbox">
@@ -56,7 +67,7 @@
                     
                 </div>
             </div>
-            <div class="main__partition"></div>
+            
             <div id = "main__out-container">
                 <!-- <div class="main__out" id="main__out">
                     <div class="main__out__photo-block"></div>

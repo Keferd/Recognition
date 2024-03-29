@@ -410,3 +410,24 @@ footer {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
+
+
+
+
+
+
+
+
+
+.main__select-block {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.main__select {
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #F1F1F1;
+}

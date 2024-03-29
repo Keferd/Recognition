@@ -49,11 +49,14 @@ sendfilebtn.addEventListener("click", function (e) {
         actions.push("emotion")
     };
 
-    console.log(actions)
     
+    model = document.getElementById("main__select_model").value
+    console.log(model)
+
     let formdata = new FormData();
     formdata.append('file', photo);
     formdata.append('actions', actions);
+    formdata.append('model', model);
     // formdata.append('camera', JSON.stringify(camera));
     // formdata.append('model', JSON.stringify(model));
     // formdata.append('check', JSON.stringify(check));
@@ -128,6 +131,7 @@ sendfilebtn.addEventListener("click", function (e) {
 
                 if (data.recognize_list.length > 0) {
                     document.getElementById("main__out-container").innerHTML = `
+                        <div class="main__partition"></div>
                         <h2 class="main__title">Результат:</h2>
                     `;
                     for (i in data.recognize_list) {
@@ -160,6 +164,12 @@ sendfilebtn.addEventListener("click", function (e) {
                             text_block.innerHTML += `<div class="main__out__text-block__accuracy">Эмоция: ` + data.facial_list[i].dominant_emotion + `</div>`
                         };
                     }
+                }
+                else {
+                    document.getElementById("main__out-container").innerHTML = `
+                        <div class="main__partition"></div>
+                        <h2 class="main__title" style="color: red">Не найдено совпадений:</h2>
+                    `;
                 }
 
             });

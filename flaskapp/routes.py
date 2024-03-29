@@ -32,6 +32,9 @@ def post_photo():
     try:
         file = request.files["file"]
         actions = request.form.get('actions')
+        model = request.form.get('model')
+
+
 
         if file and get_file_extension(file.filename) in ALLOWED_EXTENSIONS:
             save_folder = "media_files"
@@ -45,6 +48,20 @@ def post_photo():
             #     encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
 
             # Указываем модель из класса DetectorModel
+            # detector_model = DetectorModel.OPENCV
+            match model:
+                case "opencv":
+                    detector_model = DetectorModel.OPENCV
+                case "retinaface":
+                    detector_model = DetectorModel.RETINAFACE
+                case "mtcnn":
+                    detector_model = DetectorModel.MTCNN
+                case "ssd":
+                    detector_model = DetectorModel.SSD
+
+
+
+            recognize_list = recognize(save_path, detector_model=detector_model)
             detector_model = DetectorModel.OPENCV
             # recognize_list = recognize(save_path, detector_model=detector_model)
             recognize_list = recognize(redis_client=REDIS_CLIENT, img_path=save_path,
@@ -54,6 +71,8 @@ def post_photo():
             # TODO: сюда передавать что мы еще распознаем: эмоции, возраст и тд.
             # достаем из чекбокса 'age', 'gender', 'race', 'emotion'
             facial_list = facial(save_path)
+            print(recognize_list)
+            print(facial_list)
 
             response_data = {
                 'recognize_list': recognize_list,
