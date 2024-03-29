@@ -33,12 +33,13 @@ def post_photo():
             if not os.path.exists(save_folder):
                 os.makedirs(save_folder)
 
+
             save_path = os.path.join(save_folder, file.filename)
             file.save(save_path)
 
             with open(save_path, "rb") as image_file:
                 encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
-
+                        
             # Указываем модель из класса DetectorModel
             detector_model = DetectorModel.OPENCV
             recognize_list = recognize(save_path, detector_model=detector_model)
@@ -58,6 +59,107 @@ def post_photo():
         else:
             return "Файл должен быть одного из форматов: " + ', '.join(ALLOWED_EXTENSIONS), 400
 
+    except Exception as e:
+        print(e)
+        return str(e), 500
+                
+                
+                
+                
+
+@app.route('/api/video', methods=['POST'])
+def post_video():
+    
+    try:
+        file = request.files["file"]
+        # camera = request.form.get('camera')
+        # model = request.form.get('model')
+        # check = False
+        # check = request.form.get('check')
+
+        # camera = camera.replace('"', '')
+        # model = model.replace('"', '')
+        
+        
+        if file and file.filename.endswith('.jpg'):
+            save_path = os.path.join(os.path.dirname(__file__), file.filename)
+            file.save(save_path)
+
+            #тут внес изменения Kashanaft для улучшения изображения
+            # if check == "true":
+            #     image_proccessing(save_path)
+
+            # output_image_path, result = predict(camera, save_path, model)
+
+            # output_image_path = "photos/2.jpg"
+
+            os.remove(save_path)
+            
+            # with open(output_image_path, "rb") as image_file:
+            #     encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+
+            
+
+
+            "imgs": [
+                {
+                    'path': "static/img/photos/2.jpg", 
+                    'name': "photo2",
+                    'accuracy' : "49%"
+                },
+                {
+                    'path': "static/img/photos/1.jpg", 
+                    'name': "photo1",
+                    'accuracy' : "70%"
+                },
+                {
+                    'path': "static/img/photos/2.jpg", 
+                    'name': "photo2",
+                    'accuracy' : "49%"
+                },
+                {
+                    'path': "static/img/photos/1.jpg", 
+                    'name': "photo1",
+                    'accuracy' : "70%"
+                },
+                {
+                    'path': "static/img/photos/2.jpg", 
+                    'name': "photo2",
+                    'accuracy' : "49%"
+                },
+                {
+                    'path': "static/img/photos/1.jpg", 
+                    'name': "photo1",
+                    'accuracy' : "70%"
+                },
+                {
+                    'path': "static/img/photos/2.jpg", 
+                    'name': "photo2",
+                    'accuracy' : "49%"
+                },
+                {
+                    'path': "static/img/photos/1.jpg", 
+                    'name': "photo1",
+                    'accuracy' : "70%"
+                },
+                {
+                    'path': "static/img/photos/2.jpg", 
+                    'name': "photo2",
+                    'accuracy' : "49%"
+                },
+                {
+                    'path': "static/img/photos/1.jpg", 
+                    'name': "photo1",
+                    'accuracy' : "70%"
+                }
+                ]
+
+            }
+
+            return jsonify(response_data)
+
+        else:
+            return "Файл должен быть одного из форматов: " + ', '.join(ALLOWED_EXTENSIONS), 400
     except Exception as e:
         print(e)
         return str(e), 500
