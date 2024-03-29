@@ -113,7 +113,7 @@ sendfilebtn.addEventListener("click", function (e) {
                         <h2 class="main__title">Результат:</h2>
                     `;
                     for (i in data.recognize_list) {
-                        path_of_img = `../.` + data.recognize_list[i].path;
+                        path_of_img = `` + data.recognize_list[i].path;
                         path_of_img = path_of_img.replace('\\','/');
                         console.log(path_of_img);
                         document.getElementById("main__out-container").innerHTML += `
@@ -124,6 +124,10 @@ sendfilebtn.addEventListener("click", function (e) {
                             <div class="main__out__text-block">
                                 <div class="main__out__text-block__name">Имя: ` + `Somename` + `</div>
                                 <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i].distance + `</div>
+                                <div class="main__out__text-block__accuracy">Возраст: ` + data.facial_list[i].age + `</div>
+                                <div class="main__out__text-block__accuracy">Пол: ` + data.facial_list[i].dominant_gender + `</div>
+                                <div class="main__out__text-block__accuracy">Раса: ` + data.facial_list[i].dominant_race + `</div>
+                                <div class="main__out__text-block__accuracy">Эмоция: ` + data.facial_list[i].dominant_emotion + `</div>
                             </div>
                         </div>
                         `

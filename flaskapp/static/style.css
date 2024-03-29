@@ -248,6 +248,7 @@ main {
 .main__out__text-block__accuracy {
     font-size: 16px;
     color: black;
+    margin-bottom: 5px;
 }
 
 
