@@ -30,9 +30,13 @@
 8. Переместить текущую версию БД в контейнер
 - **docker cp redis-data/dump.rdb recognition-redis-1:/data/dump.rdb**
 9. Перезапустить контейнер
-- **docker-compose -f redis-docker-compose.yml up -d**
+- **docker stop recognition-redis-1**
+- **docker start recognition-redis-1**
+10. Добавить папку datasets в корневую директорию проекта
+11.
 10. Запустите приложение, выполнив следующую команду:
 - **python main.py**
    
 После этого ваше приложение будет доступно по адресу http://127.0.0.1:8000/
+
 
