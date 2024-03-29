@@ -137,6 +137,7 @@ sendfilebtn.addEventListener("click", function (e) {
                     for (i in data.recognize_list) {
                         path_of_img = `` + data.recognize_list[i].name;
                         path_of_img = path_of_img.replace('\\','/');
+                        console.log(path_of_img)
                         console.log(data.recognize_list[i].similarity);
                         document.getElementById("main__out-container").innerHTML += `
                         <div class="main__out" id="main__out">
@@ -146,6 +147,7 @@ sendfilebtn.addEventListener("click", function (e) {
                             <div class="main__out__text-block">
                                 <div class="main__out__text-block__name">Имя: ` + data.recognize_list[i].metadata.name.replace(',','') + `</div>
                                 <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i].similarity + `</div>
+                                <div class="main__out__text-block__accuracy">Специализация: ` + data.recognize_list[i].metadata.info.specialization + `</div>
                             </div>
                         </div>
                         `;

@@ -4,7 +4,7 @@ import math
 # from flaskapp.redis_init import REDIS_CLIENT
 from flaskapp import app, REDIS_CLIENT
 from flask import render_template, make_response, request, Response, jsonify, json, session, redirect, url_for, \
-    send_file
+    send_file, send_from_directory
 import json
 import base64
 import tempfile
@@ -27,6 +27,10 @@ def index():
 def video():
     return render_template('video.html')
 
+@app.route('/dataset/<path:path>')
+def get_image(path):
+    # Возвращаем запрашиваемый файл из директории
+    return send_from_directory('E://work/Ufa2024/dataset', path)
 
 @app.route('/api/photo', methods=['POST'])
 def post_photo():
@@ -55,8 +59,9 @@ def post_photo():
 
             for item in recognize_list:
                 if 'description' in item['metadata']['info']:
-                    if math.isnan(item['metadata']['info']['description']):
-                        item['metadata']['info']['description'] = ''
+                    if isinstance(item['metadata']['info']['description'], (int, float)):
+                        if math.isnan(item['metadata']['info']['description']):
+                            item['metadata']['info']['description'] = ''
 
             print(recognize_list)
             # TODO: сюда передавать что мы еще распознаем: эмоции, возраст и тд.
