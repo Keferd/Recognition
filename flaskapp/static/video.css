@@ -106,7 +106,7 @@ main {
 }
 
 .main__in__text-block {
-    width: 800px;
+    width: 100%;
     /* height: 500px; */
     height: auto;
     background-color: #F1F1F1;
@@ -156,30 +156,6 @@ main {
     
 }
 
-.main__in__photo-block {
-    width: 450px;
-    min-height: 400px;
-    background-color: #F1F1F1;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    box-sizing: border-box;
-
-    box-shadow: 3px 3px 5px #dadada;
-}
-
-.main__in__photo-name {
-    margin-bottom: 10px;
-}
-
-.main__in__photo {
-    max-width: 400px;
-    max-height: 400px;
-    margin-bottom: 20px;
-}
 
 
 
@@ -205,50 +181,7 @@ main {
     margin-bottom: 50px;
 }
 
-.main__out__photo-block {
-    width: 450px;
-    min-height: 300px;
-    background-color: #F1F1F1;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    box-sizing: border-box;
 
-    box-shadow: 3px 3px 5px #dadada;
-}
-
-.main__out__photo {
-    max-width: 400px;
-    max-height: 400px;
-    /* margin-bottom: 20px; */
-}
-
-.main__out__text-block {
-    width: 800px;
-    padding: 30px;
-    box-sizing: border-box;
-    height: auto;
-    background-color: #F1F1F1;
-    border-radius: 15px;
-    margin-bottom: 10px;
-
-    box-shadow: 3px 3px 5px #dadada;
-}
-
-.main__out__text-block__name{
-    font-size: 20px;
-    font-weight: bold;
-    color: #675BF2;
-    margin-bottom: 10px;
-}
-
-.main__out__text-block__accuracy {
-    font-size: 16px;
-    color: black;
-}
 
 
 
@@ -340,4 +273,43 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.video__result-container {
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.video__out-partition {
+    max-width: 100%;
+    border-top: 1px solid #002A95;
+    margin-bottom: 40px;
+}
+
+.video__result-container {
+    background-color: #F1F1F1;
+    box-shadow: 3px 3px 5px #dadada;
+}
+
+.video__out-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main__out__photo {
+    max-width: 150px;
+    max-height: 150px;
 }

@@ -1,31 +1,25 @@
 var dt = new DataTransfer();
 
-let photo
+let video
 
-function handleFileChange(event) {
-    let fileNameDisplay = document.getElementById('filetext');
+function videoLoad(event) {
+    let fileNameDisplay = document.getElementById('videofiletext');
     let fileInput = event.target;
-    photo = fileInput.files[0];
+    video = fileInput.files[0];
 
-    if (photo) {
+    if (video) {
 
-        document.querySelector(".main__in__photo-name").textContent = photo.name;
-        document.getElementById("filetext").textContent = photo.name
+        document.getElementById("videofiletext").textContent = video.name
 
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            document.querySelector(".main__in__photo").src = e.target.result;
-        };
-        reader.readAsDataURL(photo);
     } else {
         fileNameDisplay.textContent = '';
     }
 }
 
 
-let sendfilebtn = document.querySelector(".main__in__sendbtn");
+let sendvideobtn = document.querySelector(".main__in__sendbtn");
 
-sendfilebtn.addEventListener("click", function (e) {
+sendvideobtn.addEventListener("click", function (e) {
     e.preventDefault();
     
     // let input = document.getElementById("file");
@@ -35,7 +29,7 @@ sendfilebtn.addEventListener("click", function (e) {
     // let file = input.files[0];
     
     let formdata = new FormData();
-    formdata.append('file', photo);
+    formdata.append('file', video);
     // formdata.append('camera', JSON.stringify(camera));
     // formdata.append('model', JSON.stringify(model));
     // formdata.append('check', JSON.stringify(check));
@@ -43,8 +37,8 @@ sendfilebtn.addEventListener("click", function (e) {
 
     console.log("hello")
 
-    if (typeof photo != 'undefined') {
-        document.getElementById("main__out-container").innerHTML = `
+    if (typeof video != 'undefined') {
+        document.getElementById("video__out-container").innerHTML = `
             <div class="img__container">
                 <img class="img__loading" src="static/img/loading.png" alt="loading">
             </div>
@@ -77,7 +71,7 @@ sendfilebtn.addEventListener("click", function (e) {
         `;
         
 
-        fetch("/api/photo",
+        fetch("/api/video",
         {
             method: "POST",
             body: formdata,
@@ -112,15 +106,21 @@ sendfilebtn.addEventListener("click", function (e) {
 
 
                 if (data.imgs.length > 0) {
-                    document.getElementById("main__out-container").innerHTML = `
-                        <h2 class="main__title">Результат:</h2>
+                    document.getElementById("video__out-container").innerHTML = `
+                        <div class="video__result-container">
+                            <h2 class="main__title">Результат:</h2>
+                            <div class="video__out-partition"> </div>
+                            <div class="video__out-content" id="video__out-content">
+
+                            </div>
+                        </div
                     `;
                     for (i in data.imgs) {
-                        document.getElementById("main__out-container").innerHTML += `
-                        <div class="main__out" id="main__out">
-                            <div class="main__out__photo-block">
-                                <img class="main__out__photo" src="../` + data.imgs[i].path + `" alt="img">
-                            </div>
+                        document.getElementById("video__out-content").innerHTML += `
+                        <div class="main__out__item" id="main__out__item">
+                            
+                            <img class="main__out__photo" src="../` + data.imgs[i].path + `" alt="img">
+                            
                             <div class="main__out__text-block">
                                 <div class="main__out__text-block__name">Имя: ` + data.imgs[i].name + `</div>
                                 <div class="main__out__text-block__accuracy">Близость: ` + data.imgs[i].accuracy + `</div>
