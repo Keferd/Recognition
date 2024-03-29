@@ -10,6 +10,7 @@ from recognition.functions import facial, recognize
 from recognition.models import DetectorModel
 
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
+ALLOWED_EXTENSIONS2 = {'mp4'}
 
 
 @app.route('/')
@@ -83,7 +84,7 @@ def post_video():
         # model = model.replace('"', '')
         
         
-        if file and file.filename.endswith('.jpg'):
+        if file and file.filename.endswith('.mp4'):
             save_path = os.path.join(os.path.dirname(__file__), file.filename)
             file.save(save_path)
 
@@ -94,6 +95,7 @@ def post_video():
             # output_image_path, result = predict(camera, save_path, model)
 
             # output_image_path = "photos/2.jpg"
+
 
             os.remove(save_path)
             
@@ -161,7 +163,7 @@ def post_video():
             return jsonify(response_data)
 
         else:
-            return "Файл должен быть одного из форматов: " + ', '.join(ALLOWED_EXTENSIONS), 400
+            return "Файл должен быть одного из форматов: " + ', '.join(ALLOWED_EXTENSIONS2), 400
     except Exception as e:
         print(e)
         return str(e), 500

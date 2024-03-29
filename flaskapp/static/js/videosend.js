@@ -118,11 +118,11 @@ sendvideobtn.addEventListener("click", function (e) {
                     for (i in data.imgs) {
                         document.getElementById("video__out-content").innerHTML += `
                         <div class="main__out__item" id="main__out__item">
-                            
+                            <div class="main__out__text-block__name">Имя: ` + data.imgs[i].name + `</div>
                             <img class="main__out__photo" src="../` + data.imgs[i].path + `" alt="img">
-                            
+                            <div class="main__out__item__partition"></div>
                             <div class="main__out__text-block">
-                                <div class="main__out__text-block__name">Имя: ` + data.imgs[i].name + `</div>
+                                
                                 <div class="main__out__text-block__accuracy">Близость: ` + data.imgs[i].accuracy + `</div>
                             </div>
                         </div>
