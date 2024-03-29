@@ -146,7 +146,7 @@ sendfilebtn.addEventListener("click", function (e) {
                             </div>
                             <div class="main__out__text-block">
                                 <div class="main__out__text-block__name">Имя: ` + data.recognize_list[i].metadata.name.replace(',','') + `</div>
-                                <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i].similarity + `</div>
+                                <div class="main__out__text-block__accuracy">Сходство: ` + data.recognize_list[i].similarity + `</div>
                                 <div class="main__out__text-block__accuracy">Специализация: ` + data.recognize_list[i].metadata.info.specialization + `</div>
                             </div>
                         </div>

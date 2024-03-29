@@ -29,8 +29,8 @@ def video():
 
 @app.route('/dataset/<path:path>')
 def get_image(path):
-    # Возвращаем запрашиваемый файл из директории
-    return send_from_directory('E://work/Ufa2024/dataset', path)
+    # возвращаем схожее изображение
+    return send_from_directory('../dataset', path)
 
 @app.route('/api/photo', methods=['POST'])
 def post_photo():
@@ -47,16 +47,13 @@ def post_photo():
             save_path = os.path.join(save_folder, file.filename)
             file.save(save_path)
 
-            # with open(save_path, "rb") as image_file:
-            #     encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
-
-            # Указываем модель из класса DetectorModel
-            # detector_model = DetectorModel.OPENCV
             detector_model = "mtcnn"
 
             recognize_list = recognize(redis_client=REDIS_CLIENT, img_path=save_path,
                                        detector_model=detector_model)
 
+
+            # удаляет nan
             for item in recognize_list:
                 if 'description' in item['metadata']['info']:
                     if isinstance(item['metadata']['info']['description'], (int, float)):
