@@ -49,8 +49,6 @@ def post_photo():
             # TODO: сюда передавать что мы еще распознаем: эмоции, возраст и тд.
             # достаем из чекбокса 'age', 'gender', 'race', 'emotion'
             facial_list = facial(save_path)
-            print(recognize_list)
-            print(facial_list)
 
             response_data = {
                 'recognize_list': recognize_list,
@@ -94,7 +92,7 @@ def post_video():
                     break
 
                 # каждый пятый кадр
-                if frame_count % 5 == 0:
+                if frame_count % 50 == 0:
                     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.jpg')
                     temp_file_path = temp_file.name
                     temp_file.close()
