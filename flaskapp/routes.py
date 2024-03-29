@@ -1,11 +1,13 @@
 import os
 import cv2
-from flaskapp import app
+# from flaskapp.redis_init import REDIS_CLIENT
+from flaskapp import app, REDIS_CLIENT
 from flask import render_template, make_response, request, Response, jsonify, json, session, redirect, url_for, \
     send_file
 import json
 import base64
 import tempfile
+import redis
 
 from recognition.functions import facial, recognize
 from recognition.models import DetectorModel
@@ -30,7 +32,6 @@ def post_photo():
     try:
         file = request.files["file"]
         actions = request.form.get('actions')
-        
 
         if file and get_file_extension(file.filename) in ALLOWED_EXTENSIONS:
             save_folder = "media_files"
@@ -40,12 +41,16 @@ def post_photo():
             save_path = os.path.join(save_folder, file.filename)
             file.save(save_path)
 
-            with open(save_path, "rb") as image_file:
-                encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+            # with open(save_path, "rb") as image_file:
+            #     encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
 
             # Указываем модель из класса DetectorModel
             detector_model = DetectorModel.OPENCV
-            recognize_list = recognize(save_path, detector_model=detector_model)
+            # recognize_list = recognize(save_path, detector_model=detector_model)
+            recognize_list = recognize(redis_client=REDIS_CLIENT, img_path=save_path,
+                                       detector_model=detector_model)
+
+            print(recognize_list)
             # TODO: сюда передавать что мы еще распознаем: эмоции, возраст и тд.
             # достаем из чекбокса 'age', 'gender', 'race', 'emotion'
             facial_list = facial(save_path)
@@ -99,7 +104,8 @@ def post_video():
 
                     # сохраняем кадр как изображение во временный файл
                     cv2.imwrite(temp_file_path, frame)
-                    recognize_list.append(recognize(temp_file_path, detector_model=detector_model))
+                    recognize_list.append(recognize(redis_client=REDIS_CLIENT, img_path=save_path,
+                                       detector_model=detector_model))
                     os.unlink(temp_file_path)
 
                 frame_count += 1
