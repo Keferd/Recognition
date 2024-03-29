@@ -10,15 +10,29 @@
 - **requirements.txt**
   - Файл, содержащий список зависимостей Python, необходимых для запуска проекта.
 
-## Как развернуть приложения (пока для ветки Art2)
+## Запуск проекта (пока для ветки Art2)
 
-- **Поднять БД**
-  - docker-compose -f redis-docker-compose.yml up -d --build
-- **Убедиться что файл dump.rdb существует в папке redis-data**
-- **Переместить текущую версию БД в контейнер**
-  - docker cp redis-data/dump.rdb ufa2024-redis-1:/data/dump.rdb
-- **Перезапустить контейнер**
-  - docker-compose -f redis-docker-compose.yml up -d
+Чтобы запустить проект, выполните следующие шаги:
+
+1. Убедитесь, что у вас установлен Python.
+2. Установите инструмент для создания изолированной среды Python 
+- **pip install virtualenv**
+- **pip install virtualenvwrapper-win**
+3. Создайте изолированную среду в Python 
+- **python3 -m venv venv**
+4. Активируйте созданную виртуальную среду
+- **venv\Scripts\activate** или **venv\Scripts\activate.bat**
+5. Установите необходимые зависимости, выполнив следующую команду:
+- **pip install -r requirements.txt**
+6. Поднять БД
+- **docker-compose -f redis-docker-compose.yml up -d --build**
+7. Убедиться что файл dump.rdb существует в папке redis-data
+8. Переместить текущую версию БД в контейнер
+- **docker cp redis-data/dump.rdb ufa2024-redis-1:/data/dump.rdb**
+9. Перезапустить контейнер
+- **docker-compose -f redis-docker-compose.yml up -d**
+10. Запустите приложение, выполнив следующую команду:
+- **python main.py**
    
-приложение будет доступно по ссылке http://127.0.0.1:8000/
+После этого ваше приложение будет доступно по адресу http://127.0.0.1:8000/
 
