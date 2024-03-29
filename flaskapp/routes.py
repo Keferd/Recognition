@@ -30,7 +30,7 @@ def post_photo():
     try:
         file = request.files["file"]
         actions = request.form.get('actions')
-        print(actions)
+        
 
         if file and get_file_extension(file.filename) in ALLOWED_EXTENSIONS:
             save_folder = "media_files"
