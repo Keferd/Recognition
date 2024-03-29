@@ -18,7 +18,7 @@ def recognize(image_path: str, detector_model):
 
 def facial(img: str, actions: list = None):
     if not actions:
-        return None
+        return []
     try:
         objs = DeepFace.analyze(img_path=img, actions=actions)
     except ValueError as e:
