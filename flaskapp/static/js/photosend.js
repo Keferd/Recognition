@@ -8,7 +8,14 @@ function handleFileChange(event) {
     photo = fileInput.files[0];
 
     if (photo) {
-        fileNameDisplay.textContent = photo.name;
+
+        document.querySelector(".main__in__photo-name").textContent = photo.name;
+
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            document.querySelector(".main__in__photo").src = e.target.result;
+        };
+        reader.readAsDataURL(photo);
     } else {
         fileNameDisplay.textContent = '';
     }
@@ -36,7 +43,7 @@ sendfilebtn.addEventListener("click", function (e) {
     console.log("hello")
 
     if (typeof photo != 'undefined') {
-        document.getElementById("main__out").innerHTML = `
+        document.getElementById("main__out-container").innerHTML = `
             <div class="img__container">
                 <img class="img__loading" src="static/img/loading.png" alt="loading">
             </div>
@@ -80,90 +87,47 @@ sendfilebtn.addEventListener("click", function (e) {
         .then( response => {
             response.json().then(function(data) {
 
-                var encodedImage = data.image_url;
+                // var encodedImage = data.image_url;
 
-                // Декодирование Base64 в бинарные данные
-                var decodedImage = atob(encodedImage);
+                // // Декодирование Base64 в бинарные данные
+                // var decodedImage = atob(encodedImage);
 
-                // Преобразование бинарных данных в массив байт
-                var byteCharacters = decodedImage.split('').map(char => char.charCodeAt(0));
-                var byteArray = new Uint8Array(byteCharacters);
+                // // Преобразование бинарных данных в массив байт
+                // var byteCharacters = decodedImage.split('').map(char => char.charCodeAt(0));
+                // var byteArray = new Uint8Array(byteCharacters);
 
-                // Тип изображения (зависит от формата изображения)
-                var imageType = 'image/jpeg';
+                // // Тип изображения (зависит от формата изображения)
+                // var imageType = 'image/jpeg';
 
-                // Создание объекта Blob из массива байт с правильным типом
-                var blob = new Blob([byteArray], { type: imageType });
+                // // Создание объекта Blob из массива байт с правильным типом
+                // var blob = new Blob([byteArray], { type: imageType });
 
-                // Создание объекта URL для использования в src атрибуте изображения
-                var imageUrl = URL.createObjectURL(blob);
+                // // Создание объекта URL для использования в src атрибуте изображения
+                // var imageUrl = URL.createObjectURL(blob);
+                console.log(data);
+                console.log(data.imgs)
+                console.log(data.imgs[0])
+                console.log(data.imgs[0].path)
 
-                // for (i in data.json_object[0]) {
-                //     console.log(i+1, data.json_object[0][i], data.json_object[1][i])
-                // }
 
-
-                document.getElementById("main__out").innerHTML = `
-                    
-                    <h2 class="main__h2">
-                        Результат
-                    </h2>
-                    <div class="result__img"> 
-                        <img src=` + imageUrl + ` alt="Изображение">
-                    </div>
-
-                    <a class="aside__button_a" href=` + imageUrl + ` download="result.jpg">
-                        <input  class="aside__button_download" type="button" value="Скачать">
-                    </a>
-
-                    <div style="font-size: 24px; margin-top: 30px; margin-bottom: 50px;">
-                        <table id="table" style="border-spacing: 0;"> 
-                            
-                        </table>
-                    </div>
-
-                    <style>
-                        th {
-                            background-color: #3498db;
-                            color: #fafafa;
-                        }
-
-                        td, th {
-                            min-width: 100px;
-                            min-height: 40px;
-                            border: 1px solid black;
-                            text-align: center;
-                        }
-                    </style>
-                    `;  
-
-                    // if (data.json_object[0].length > 0) {
-                    //     document.getElementById("table").innerHTML += `
-                    //         <caption>Таблица объектов</caption>
-                    //         <thead>
-                    //             <tr>
-                    //                 <th>Id</th>
-                    //                 <th>Sign</th>
-                    //                 <th>Score</th>
-                    //                 <th>Dist</th>
-                    //             </tr>
-                    //         </thead>   
-                    //         <tbody id="tbody">
-
-                    //         </tbody>
-                    //     `;
-
-                    //     for (i in data.json_object[0]) {
-                    //         document.getElementById("tbody").innerHTML += `
-                    //             <tr>
-                    //                 <td>` + data.json_object[0][i] + `</td>
-                    //                 <td>` + data.json_object[1][i] + `</td>
-                    //                 <td>` + data.json_object[2][i] + `</td>
-                    //                 <td>` + data.json_object[3][i] + `</td>
-                    //             </tr>
-                    //         `;
-                    //     };
-                    // }
+                if (data.imgs.length > 0) {
+                    document.getElementById("main__out-container").innerHTML = `
+                        <h2 class="main__title">Результат:</h2>
+                    `;
+                    for (i in data.imgs) {
+                        document.getElementById("main__out-container").innerHTML += `
+                        <div class="main__out" id="main__out">
+                            <div class="main__out__photo-block">
+                                <img class="main__out__photo" src="../` + data.imgs[i].path + `" alt="img">
+                            </div>
+                            <div class="main__out__text-block">
+                                <div class="main__out__text-block__name">Имя: ` + data.imgs[i].name + `</div>
+                                <div class="main__out__text-block__accuracy">Близость: ` + data.imgs[i].accuracy + `</div>
+                            </div>
+                        </div>
+                        `
+                    }
+                }
 
             });
         })

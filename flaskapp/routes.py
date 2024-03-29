@@ -41,16 +41,28 @@ def post_photo():
 
             # output_image_path, result = predict(camera, save_path, model)
 
-            output_image_path = "photos/2.jpg"
+            # output_image_path = "photos/2.jpg"
 
             os.remove(save_path)
             
-            with open(output_image_path, "rb") as image_file:
-                encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+            # with open(output_image_path, "rb") as image_file:
+            #     encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+
+            
 
             response_data = {
-                'image_url': encoded_image, 
-                # 'json_object': result
+                "imgs": [
+                    {
+                        'path': "static/img/photos/2.jpg", 
+                        'name': "photo2",
+                        'accuracy' : "49%"
+                    },
+                    {
+                        'path': "static/img/photos/1.jpg", 
+                        'name': "photo1",
+                        'accuracy' : "70%"
+                    }
+                ]
             }
 
             # os.remove(output_image_path)
