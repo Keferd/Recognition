@@ -1,5 +1,6 @@
 import os
 import cv2
+import math
 # from flaskapp.redis_init import REDIS_CLIENT
 from flaskapp import app, REDIS_CLIENT
 from flask import render_template, make_response, request, Response, jsonify, json, session, redirect, url_for, \
@@ -32,9 +33,7 @@ def post_photo():
     try:
         file = request.files["file"]
         actions = request.form.get('actions')
-        model = request.form.get('model')
-
-
+        # model = request.form.get('model')
 
         if file and get_file_extension(file.filename) in ALLOWED_EXTENSIONS:
             save_folder = "media_files"
@@ -49,30 +48,20 @@ def post_photo():
 
             # Указываем модель из класса DetectorModel
             # detector_model = DetectorModel.OPENCV
-            match model:
-                case "opencv":
-                    detector_model = DetectorModel.OPENCV
-                case "retinaface":
-                    detector_model = DetectorModel.RETINAFACE
-                case "mtcnn":
-                    detector_model = DetectorModel.MTCNN
-                case "ssd":
-                    detector_model = DetectorModel.SSD
+            detector_model = "mtcnn"
 
-
-
-            recognize_list = recognize(save_path, detector_model=detector_model)
-            detector_model = DetectorModel.OPENCV
-            # recognize_list = recognize(save_path, detector_model=detector_model)
             recognize_list = recognize(redis_client=REDIS_CLIENT, img_path=save_path,
                                        detector_model=detector_model)
+
+            for item in recognize_list:
+                if 'description' in item['metadata']['info']:
+                    if math.isnan(item['metadata']['info']['description']):
+                        item['metadata']['info']['description'] = ''
 
             print(recognize_list)
             # TODO: сюда передавать что мы еще распознаем: эмоции, возраст и тд.
             # достаем из чекбокса 'age', 'gender', 'race', 'emotion'
-            facial_list = facial(save_path)
-            print(recognize_list)
-            print(facial_list)
+            facial_list = []  #facial(save_path, actions=actions.split(','))
 
             response_data = {
                 'recognize_list': recognize_list,

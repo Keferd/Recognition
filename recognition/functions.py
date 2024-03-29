@@ -19,7 +19,6 @@ def recognize(redis_client: redis.Redis, img_path: str, detector_model: str = "m
         base_query = f'*=>[KNN {k_neighbors} @embedding $query_vector AS distance]'
         query = Query(base_query).return_fields("distance").sort_by("distance").dialect(2)
         results = redis_client.ft().search(query, query_params={"query_vector": query_vector})
-
         item = {}
         for result in results.docs:
             data_from_redis = redis_client.hgetall(result.id)

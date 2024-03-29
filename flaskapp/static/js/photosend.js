@@ -135,17 +135,17 @@ sendfilebtn.addEventListener("click", function (e) {
                         <h2 class="main__title">Результат:</h2>
                     `;
                     for (i in data.recognize_list) {
-                        path_of_img = `` + data.recognize_list[i].path;
+                        path_of_img = `` + data.recognize_list[i].name;
                         path_of_img = path_of_img.replace('\\','/');
-                        console.log(path_of_img);
+                        console.log(data.recognize_list[i].similarity);
                         document.getElementById("main__out-container").innerHTML += `
                         <div class="main__out" id="main__out">
                             <div class="main__out__photo-block">
                                 <img class="main__out__photo" src="` + path_of_img + `" alt="img">
                             </div>
                             <div class="main__out__text-block">
-                                <div class="main__out__text-block__name">Имя: ` + `Somename` + `</div>
-                                <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i].distance + `</div>
+                                <div class="main__out__text-block__name">Имя: ` + data.recognize_list[i].metadata.name.replace(',','') + `</div>
+                                <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i].similarity + `</div>
                             </div>
                         </div>
                         `;
