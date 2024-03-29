@@ -49,11 +49,14 @@ sendfilebtn.addEventListener("click", function (e) {
         actions.push("emotion")
     };
 
-    console.log(actions)
     
+    model = document.getElementById("main__select_model").value
+    console.log(model)
+
     let formdata = new FormData();
     formdata.append('file', photo);
     formdata.append('actions', actions);
+    formdata.append('model', model);
     // formdata.append('camera', JSON.stringify(camera));
     // formdata.append('model', JSON.stringify(model));
     // formdata.append('check', JSON.stringify(check));
