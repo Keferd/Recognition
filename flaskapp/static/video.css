@@ -309,6 +309,10 @@ footer {
     flex-wrap: wrap;
 }
 
+.main__out__item {
+
+}
+
 .main__out__photo {
     max-width: 150px;
     max-height: 150px;

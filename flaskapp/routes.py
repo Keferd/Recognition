@@ -50,9 +50,11 @@ def post_photo():
             print(facial_list)
 
             response_data = {
-                'image_url': encoded_image,
-                # 'json_object': result
+                'recognize_list': recognize_list,
+                'facial_list': facial_list
             }
+            
+            # print(response_data)
 
             return jsonify(response_data)
 
@@ -100,7 +102,7 @@ def post_video():
 
             
 
-
+            response_data = {
             "imgs": [
                 {
                     'path': "static/img/photos/2.jpg", 

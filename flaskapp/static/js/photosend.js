@@ -41,7 +41,6 @@ sendfilebtn.addEventListener("click", function (e) {
     // formdata.append('check', JSON.stringify(check));
     // formdata.append('test', 'test is work');
 
-    console.log("hello")
 
     if (typeof photo != 'undefined') {
         document.getElementById("main__out-container").innerHTML = `
@@ -105,25 +104,26 @@ sendfilebtn.addEventListener("click", function (e) {
 
                 // // Создание объекта URL для использования в src атрибуте изображения
                 // var imageUrl = URL.createObjectURL(blob);
-                console.log(data);
-                console.log(data.imgs)
-                console.log(data.imgs[0])
-                console.log(data.imgs[0].path)
+                console.log(data.recognize_list);
+                console.log(data.facial_list)
 
 
-                if (data.imgs.length > 0) {
+                if (data.recognize_list.length > 0) {
                     document.getElementById("main__out-container").innerHTML = `
                         <h2 class="main__title">Результат:</h2>
                     `;
-                    for (i in data.imgs) {
+                    for (i in data.recognize_list) {
+                        path_of_img = `../.` + data.recognize_list[i].path;
+                        path_of_img = path_of_img.replace('\\','/');
+                        console.log(path_of_img);
                         document.getElementById("main__out-container").innerHTML += `
                         <div class="main__out" id="main__out">
                             <div class="main__out__photo-block">
-                                <img class="main__out__photo" src="../` + data.imgs[i].path + `" alt="img">
+                                <img class="main__out__photo" src="` + path_of_img + `" alt="img">
                             </div>
                             <div class="main__out__text-block">
-                                <div class="main__out__text-block__name">Имя: ` + data.imgs[i].name + `</div>
-                                <div class="main__out__text-block__accuracy">Близость: ` + data.imgs[i].accuracy + `</div>
+                                <div class="main__out__text-block__name">Имя: ` + `Somename` + `</div>
+                                <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i].distance + `</div>
                             </div>
                         </div>
                         `

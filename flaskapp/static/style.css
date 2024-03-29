@@ -223,7 +223,7 @@ main {
 .main__out__photo {
     max-width: 400px;
     max-height: 400px;
-    /* margin-bottom: 20px; */
+    margin-bottom: 20px;
 }
 
 .main__out__text-block {
