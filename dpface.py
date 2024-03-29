@@ -16,7 +16,7 @@ class Model(str, enum.Enum):
     GhostFaceNet = "GhostFaceNet"
 
 
-dfs = df.find(img_path="images/_-ifLxymQNw.jpg", db_path="images", model_name=Model.OpenFace)
+dfs = df.find(img_path="images/_-ifLxymQNw.jpg", db_path="db_images", model_name=Model.OpenFace)
 
 with open('results/ds_vggface_opencv_v2.pkl', 'rb') as file:
     your_object = pickle.load(file)
