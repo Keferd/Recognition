@@ -342,3 +342,71 @@ footer {
     align-items: center;
     justify-content: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main__in__checkbocks {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+  
+  .custom-checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+  
+  .custom-checkbox + label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 25px;
+    font-size: 16px;
+  }
+  
+  .custom-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .custom-checkbox:checked + label:before {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .custom-checkbox:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }

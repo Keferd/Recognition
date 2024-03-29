@@ -33,9 +33,27 @@ sendfilebtn.addEventListener("click", function (e) {
     // let model = document.getElementById("model").value;
     // let check = document.getElementById("check").checked;
     // let file = input.files[0];
+
+    actions = []
+
+    if (document.getElementById("checkbox_age").checked) {
+        actions.push("age")
+    };
+    if (document.getElementById("checkbox_gender").checked) {
+        actions.push("gender")
+    };
+    if (document.getElementById("checkbox_race").checked) {
+        actions.push("race")
+    };
+    if (document.getElementById("checkbox_emotion").checked) {
+        actions.push("emotion")
+    };
+
+    console.log(actions)
     
     let formdata = new FormData();
     formdata.append('file', photo);
+    formdata.append('actions', actions);
     // formdata.append('camera', JSON.stringify(camera));
     // formdata.append('model', JSON.stringify(model));
     // formdata.append('check', JSON.stringify(check));
@@ -124,13 +142,23 @@ sendfilebtn.addEventListener("click", function (e) {
                             <div class="main__out__text-block">
                                 <div class="main__out__text-block__name">Имя: ` + `Somename` + `</div>
                                 <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i].distance + `</div>
-                                <div class="main__out__text-block__accuracy">Возраст: ` + data.facial_list[i].age + `</div>
-                                <div class="main__out__text-block__accuracy">Пол: ` + data.facial_list[i].dominant_gender + `</div>
-                                <div class="main__out__text-block__accuracy">Раса: ` + data.facial_list[i].dominant_race + `</div>
-                                <div class="main__out__text-block__accuracy">Эмоция: ` + data.facial_list[i].dominant_emotion + `</div>
                             </div>
                         </div>
-                        `
+                        `;
+
+                        text_block = document.querySelector(".main__out__text-block")
+                        if (actions.includes("age")) {
+                            text_block.innerHTML += `<div class="main__out__text-block__accuracy">Возраст: ` + data.facial_list[i].age + `</div>`
+                        };
+                        if (actions.includes("gender")) {
+                            text_block.innerHTML += `<div class="main__out__text-block__accuracy">Пол: ` + data.facial_list[i].dominant_gender + `</div>`
+                        };
+                        if (actions.includes("race")) {
+                            text_block.innerHTML += `<div class="main__out__text-block__accuracy">Раса: ` + data.facial_list[i].dominant_race + `</div>`
+                        };
+                        if (actions.includes("emotion")) {
+                            text_block.innerHTML += `<div class="main__out__text-block__accuracy">Эмоция: ` + data.facial_list[i].dominant_emotion + `</div>`
+                        };
                     }
                 }
 
