@@ -49,8 +49,6 @@ def post_photo():
             # TODO: сюда передавать что мы еще распознаем: эмоции, возраст и тд.
             # достаем из чекбокса 'age', 'gender', 'race', 'emotion'
             facial_list = facial(save_path)
-            print(recognize_list)
-            print(facial_list)
 
             response_data = {
                 'recognize_list': recognize_list,
