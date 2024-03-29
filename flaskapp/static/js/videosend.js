@@ -107,6 +107,7 @@ sendvideobtn.addEventListener("click", function (e) {
 
                 if (data.imgs.length > 0) {
                     document.getElementById("video__out-container").innerHTML = `
+                        <div class="main__partition"></div>
                         <div class="video__result-container">
                             <h2 class="main__title">Результат:</h2>
                             <div class="video__out-partition"> </div>

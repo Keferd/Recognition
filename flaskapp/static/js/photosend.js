@@ -128,6 +128,7 @@ sendfilebtn.addEventListener("click", function (e) {
 
                 if (data.recognize_list.length > 0) {
                     document.getElementById("main__out-container").innerHTML = `
+                        <div class="main__partition"></div>
                         <h2 class="main__title">Результат:</h2>
                     `;
                     for (i in data.recognize_list) {
@@ -160,6 +161,12 @@ sendfilebtn.addEventListener("click", function (e) {
                             text_block.innerHTML += `<div class="main__out__text-block__accuracy">Эмоция: ` + data.facial_list[i].dominant_emotion + `</div>`
                         };
                     }
+                }
+                else {
+                    document.getElementById("main__out-container").innerHTML = `
+                        <div class="main__partition"></div>
+                        <h2 class="main__title" style="color: red">Не найдено совпадений:</h2>
+                    `;
                 }
 
             });
