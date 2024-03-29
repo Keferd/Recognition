@@ -159,9 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-flaskapp/static/db_images/actors_ussr_russia
 
-ds_recognitionmodel.arcface_detectormodel.opencv_v2.pkl
-ds_recognitionmodel.vgg_face_detectormodel.opencv_v2.pkl
-ds_recognitionmodel.vgg_face_detectormodel.ssd_v2.pkl
-ds_recognitionmodel.vgg_face_detectormodel.yolov8_v2.pkl
+flaskapp/static/db_images
+!flaskapp/static/db_images/__init__.py
+
