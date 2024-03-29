@@ -16,7 +16,7 @@ def recognize(image_path: str, detector_model):
     return res
 
 
-def facial(img: str, actions: list = ['age', 'gender', 'race', 'emotion']):
+def facial(img: str, actions: list = None):
     if not actions:
         return None
     try:
