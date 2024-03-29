@@ -94,7 +94,7 @@ def post_video():
                     break
 
                 # каждый пятый кадр
-                if frame_count % 5 == 0:
+                if frame_count % 50 == 0:
                     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.jpg')
                     temp_file_path = temp_file.name
                     temp_file.close()
