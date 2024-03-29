@@ -306,14 +306,37 @@ footer {
 
 .video__out-content {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
+    justify-content: flex-start;
 }
 
 .main__out__item {
-
+    width: 250px;
+    height: auto;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #FDFDFD;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    padding: 30px;
+    box-sizing: border-box;
+    margin-right: 60px;
 }
+
 
 .main__out__photo {
     max-width: 150px;
     max-height: 150px;
+    margin-top: 10px;
+
+}
+
+.main__out__item__partition {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-bottom: 1px solid black;
 }
