@@ -36,7 +36,7 @@
 - **docker-compose -f redis-docker-compose.yml up -d --build**
 7. Убедиться что файл dump.rdb существует в папке redis-data
 8. Переместить текущую версию БД в контейнер
-- **docker cp redis-data/dump.rdb recognition-redis-1:/data/dump.rdb**
+- **docker cp redis-data/dump.rdb ufa2024-redis-1:/data/dump.rdb**
 9. Перезапустить контейнер
 - **docker stop ufa2024-redis-1**
 - **docker start ufa2024-redis-1**
