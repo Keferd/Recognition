@@ -30,7 +30,7 @@ def video():
 @app.route('/dataset/<path:path>')
 def get_image(path):
     # возвращаем схожее изображение
-    return send_from_directory('../dataset', path)
+    return send_from_directory('../flaskapp/static/db_images', path)
 
 @app.route('/api/photo', methods=['POST'])
 def post_photo():
