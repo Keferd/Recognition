@@ -252,59 +252,15 @@ main {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 footer {
-    color: #579C94;
+    color: #514d82;
     min-height: 60px;
-    background-color: #8FEBE0;
+    background-color: #968FEB;
     padding: 0 50px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .fileInputLabel {

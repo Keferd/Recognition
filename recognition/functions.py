@@ -2,6 +2,7 @@ from deepface import DeepFace
 import numpy as np
 import redis
 import json
+import math
 import pickle
 from redis.commands.search.query import Query
 from recognition.models import RecognitionModel, DetectorModel
@@ -27,6 +28,9 @@ def recognize(redis_client: redis.Redis, img_path: str, detector_model: str = "m
                 'metadata': json.loads(data_from_redis[b'metadata']),
                 'similarity': f'{round((1 - float(result.distance)) * 100)}%'
             }
+            if 'specialization' in item.get('metadata', {}).get('info', {}):
+                if isinstance(item['metadata']['info']['specialization'], float) and math.isnan(item['metadata']['info']['specialization']):
+                    item['metadata']['info']['specialization'] = ''
 
         recognized_data.append(item)
 

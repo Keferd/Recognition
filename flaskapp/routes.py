@@ -95,7 +95,7 @@ def post_video():
             save_path = os.path.join(save_folder, file.filename)
             file.save(save_path)
 
-            detector_model = DetectorModel.OPENCV
+            detector_model = DetectorModel.MTCNN
             recognize_list = []
 
             cap = cv2.VideoCapture(save_path)

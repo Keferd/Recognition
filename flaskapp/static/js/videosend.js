@@ -125,7 +125,7 @@ sendvideobtn.addEventListener("click", function (e) {
                             <div class="main__out__item__partition"></div>
                             <div class="main__out__text-block">
                                 
-                                <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i][0].similarity + `</div>
+                                <div class="main__out__text-block__accuracy">Сходство: ` + data.recognize_list[i][0].similarity + `</div>
                             </div>
                         </div>
                         `
