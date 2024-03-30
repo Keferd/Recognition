@@ -120,12 +120,12 @@ sendvideobtn.addEventListener("click", function (e) {
                     for (i in data.recognize_list) {
                         document.getElementById("video__out-content").innerHTML += `
                         <div class="main__out__item" id="main__out__item">
-                            <div class="main__out__text-block__name">Имя: ` + `Somename` + `</div>
-                            <img class="main__out__photo" src="../` + data.recognize_list[i][0].path + `" alt="img">
+                            <div class="main__out__text-block__name">Имя: ` + data.recognize_list[i][0].metadata.name + `</div>
+                            <img class="main__out__photo" src="../` + data.recognize_list[i][0].name + `" alt="img">
                             <div class="main__out__item__partition"></div>
                             <div class="main__out__text-block">
                                 
-                                <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i][0].distance + `</div>
+                                <div class="main__out__text-block__accuracy">Близость: ` + data.recognize_list[i][0].similarity + `</div>
                             </div>
                         </div>
                         `

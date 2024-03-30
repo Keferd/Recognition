@@ -31,8 +31,7 @@ def video():
 @app.route('/dataset/<path:path>')
 def get_image(path):
     # возвращаем схожее изображение
-    return send_from_directory('../flaskapp/static/db_images', path)
-
+    return send_from_directory('../dataset', path)
 
 @app.route('/api/photo', methods=['POST'])
 def post_photo():
@@ -64,6 +63,7 @@ def post_photo():
                             item['metadata']['info']['description'] = ''
 
             facial_list = facial(save_path, actions=actions)
+            print(facial_list)
 
             response_data = {
                 'recognize_list': recognize_list,
@@ -114,14 +114,21 @@ def post_video():
 
                     # сохраняем кадр как изображение во временный файл
                     cv2.imwrite(temp_file_path, frame)
-                    recognize_list.append(recognize(redis_client=REDIS_CLIENT, img_path=save_path,
+                    recognize_list.append(recognize(redis_client=REDIS_CLIENT, img_path=temp_file_path,
                                                     detector_model=detector_model))
                     os.unlink(temp_file_path)
 
                 frame_count += 1
 
             cap.release()
+            print(recognize_list)
             os.remove(save_path)
+            for rec_list in recognize_list:
+                for item in rec_list:
+                    if 'description' in item['metadata']['info']:
+                        if isinstance(item['metadata']['info']['description'], (int, float)):
+                            if math.isnan(item['metadata']['info']['description']):
+                                item['metadata']['info']['description'] = ''
             return jsonify({'recognize_list': recognize_list})
 
         else:
