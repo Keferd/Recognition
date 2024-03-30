@@ -38,8 +38,8 @@
 8. Переместить текущую версию БД в контейнер
 - **docker cp redis-data/dump.rdb recognition-redis-1:/data/dump.rdb**
 9. Перезапустить контейнер
-- **docker stop recognition-redis-1**
-- **docker start recognition-redis-1**
+- **docker stop ufa2024-redis-1**
+- **docker start ufa2024-redis-1**
 10. Запустите приложение, выполнив следующую команду:
 - **python main.py**
    
