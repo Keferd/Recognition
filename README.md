@@ -3,7 +3,7 @@
 
 Данный проект представляет собой систему на базе ИИ по распознаванию лиц знаменитостей на фото/видео
 
-Структура проекта (возможны правки)
+Структура проекта:
 
 - **flaskapp/**
   - Project front-end
@@ -36,12 +36,11 @@
 - **docker-compose -f redis-docker-compose.yml up -d --build**
 7. Убедиться что файл dump.rdb существует в папке redis-data
 8. Переместить текущую версию БД в контейнер
-- **docker cp redis-data/dump.rdb recognition-redis-1:/data/dump.rdb**
+- **docker cp redis-data/dump.rdb ufa2024-redis-1:/data/dump.rdb**
 9. Перезапустить контейнер
-- **docker stop recognition-redis-1**
-- **docker start recognition-redis-1**
-10. Добавить папку datasets в корневую директорию проекта
-11. Запустите приложение, выполнив следующую команду:
+- **docker stop ufa2024-redis-1**
+- **docker start ufa2024-redis-1**
+10. Запустите приложение, выполнив следующую команду:
 - **python main.py**
    
 После этого ваше приложение будет доступно по адресу http://127.0.0.1:8000/
