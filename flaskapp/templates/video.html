@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Распознаватель</title>
+    <link rel="stylesheet" href="static/video.css">
+    <script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <a href="" class="header__title">Распознаватель</a>
+        <a href="/index" class="header__item">Фото</a>
+        <a href="/video" class="header__item">Видео</a>
+    </header>
+    <main>
+        <div class="main__container">
+            <h2 class="main__title">Распознавание по видео</h2>
+            <div class="main__in">
+                <div class="main__in__text-block">
+                    <div class="main__in__photo-load-block">
+                        <div class="main__in__text-block__title">Загрузите изображение для распознавания:</div>
+                        <label for="fileInput" class="fileInputLabel">
+                            <div class="filetext" id="videofiletext">Выберите файл...</div>
+                            <div class="filebutton">Выбрать</div>
+                        </label>
+                        <input type="file" id="fileInput" class="fileInput" onchange="videoLoad(event)">
+                        <div id="fileNameDisplay" class="fileNameDisplay"></div>
+                        <div id="status"></div>
+                    </div>
+                    <div class="main__in__sendbtn">
+                        Запустить
+                    </div>
+                </div>
+            </div>
+            
+            <div id = "video__out-container">
+                <!-- <div class="main__out" id="main__out">
+                    <div class="main__out__photo-block"></div>
+                    <div class="main__out__text-block"></div>
+                </div> -->
+            </div>
+        </div>
+    </main>
+    <footer>
+        Это база
+    </footer>
+
+
+
+
+
+
+    <script> 
+        // var dt = new DataTransfer();
+
+        // function handleFileChange(event) {
+        //     let fileNameDisplay = document.getElementById('filetext');
+        //     let fileInput = event.target;
+        //     let photo = fileInput.files[0];
+
+        //     if (photo) {
+        //         fileNameDisplay.textContent = photo.name;
+        //     } else {
+        //         fileNameDisplay.textContent = '';
+        //     }
+        // }
+ 
+        // $('.input-file input[type=file]').on('change', function(){
+        //     let $files_list = $(this).closest('.input-file').next();
+        //     $files_list.empty();
+         
+        //     for(var i = 0; i < this.files.length; i++){
+        //         let new_file_input = '<div class="input-file-list-item">' +
+        //             '<div class="input-file-list-item1">' + 
+        //                 '<span class="input-file-list-name">' + this.files.item(i).name + '</span>' + '</div>' +
+        //             '<a href="#" onclick="removeFilesItem(this); return false;" class="input-file-list-remove">x</a>' +
+        //             '</div>' + 
+        //             '<style> .form__partition { margin-top: 50px; } </style>';
+        //         $files_list.append(new_file_input);
+        //         dt.items.add(this.files.item(i));
+        //     };
+        //     this.files = dt.files;
+        // });
+         
+        // function removeFilesItem(target){
+        //     let name = $(target).prev().text();
+        //     let input = $(target).closest('.input-file-row').find('input[type=file]');	
+        //     $(target).closest('.input-file-list-item').remove();	
+        //     for(let i = 0; i < dt.items.length; i++){
+        //         if(name === dt.items[i].getAsFile().name){
+        //             dt.items.remove(i);
+        //         }
+        //     }
+        //     input[0].files = dt.files;  
+        // }
+        </script>
+        <script src="static/js/videosend.js"></script>
+</body>
+</html>
