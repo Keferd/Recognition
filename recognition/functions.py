@@ -10,7 +10,8 @@ from recognition.models import RecognitionModel, DetectorModel
 def recognize(redis_client: redis.Redis, img_path: str, detector_model: str = "mtcnn", k_neighbors: int = 1) -> list[dict]:
     represents = DeepFace.represent(img_path=img_path,
                                     model_name="Facenet",
-                                    detector_backend=detector_model)
+                                    detector_backend=detector_model,
+                                    enforce_detection=False)
     recognized_data = []
     for idx, rep in enumerate(represents):
         embedding = rep["embedding"]
@@ -24,7 +25,7 @@ def recognize(redis_client: redis.Redis, img_path: str, detector_model: str = "m
             item = {
                 'name': result.id,
                 'metadata': json.loads(data_from_redis[b'metadata']),
-                'similarity': f'{(1 - round(float(result.distance), 2)) * 100}%'
+                'similarity': f'{round((1 - float(result.distance)) * 100)}%'
             }
 
         recognized_data.append(item)

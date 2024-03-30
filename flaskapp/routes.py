@@ -27,17 +27,21 @@ def index():
 def video():
     return render_template('video.html')
 
+
 @app.route('/dataset/<path:path>')
 def get_image(path):
     # возвращаем схожее изображение
     return send_from_directory('../flaskapp/static/db_images', path)
 
+
 @app.route('/api/photo', methods=['POST'])
 def post_photo():
     try:
         file = request.files["file"]
+        # TODO: Исправить ошибку
         actions = request.form.get('actions')
-        # model = request.form.get('model')
+        actions = None if actions == ('') else actions.split(',')
+        model = request.form.get('model')
 
         if file and get_file_extension(file.filename) in ALLOWED_EXTENSIONS:
             save_folder = "media_files"
@@ -47,11 +51,10 @@ def post_photo():
             save_path = os.path.join(save_folder, file.filename)
             file.save(save_path)
 
-            detector_model = "mtcnn"
+            detector_model = model
 
             recognize_list = recognize(redis_client=REDIS_CLIENT, img_path=save_path,
                                        detector_model=detector_model)
-
 
             # удаляет nan
             for item in recognize_list:
@@ -60,10 +63,7 @@ def post_photo():
                         if math.isnan(item['metadata']['info']['description']):
                             item['metadata']['info']['description'] = ''
 
-            print(recognize_list)
-            # TODO: сюда передавать что мы еще распознаем: эмоции, возраст и тд.
-            # достаем из чекбокса 'age', 'gender', 'race', 'emotion'
-            facial_list = []  #facial(save_path, actions=actions.split(','))
+            facial_list = facial(save_path, actions=actions)
 
             response_data = {
                 'recognize_list': recognize_list,
@@ -115,7 +115,7 @@ def post_video():
                     # сохраняем кадр как изображение во временный файл
                     cv2.imwrite(temp_file_path, frame)
                     recognize_list.append(recognize(redis_client=REDIS_CLIENT, img_path=save_path,
-                                       detector_model=detector_model))
+                                                    detector_model=detector_model))
                     os.unlink(temp_file_path)
 
                 frame_count += 1
